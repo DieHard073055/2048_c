@@ -109,6 +109,12 @@ int main(){
 	save_player_data(gp);
 	read_player_data();
 	
+	for(i=0;i<SIZE;i++)
+	free((gp)->b[i]);
+	free((gp)->b);
+	free((gp)->player);
+	free(gp);
+	
 	return 0;
 }
 GAME_PACKAGE * setup(){
