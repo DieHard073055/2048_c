@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <conio.h>
 
-#define DEBUG
+/*#define DEBUG   Uncomment this for debugging*/
 /*
 	VARIABLE DEFINITIONS
 */
@@ -147,11 +147,8 @@ void welcome(GAME_PACKAGE * gp){
 	 	name[i++] = ch;
 	 } */
 	 scanf("%s", name); 
-	 printf("i = %i\n",i);
 	(gp)->score = 0;
-	printf("i = %i\n",i);
 	strcpy((gp)->player, name);
-	printf("i = %i\n",i);
 	printf("\n\n\n\t\t Welcome %s, Lets Begin!\n\n",name);
 	
 }
@@ -220,7 +217,6 @@ void init(GAME_PACKAGE * gp){
 	
 	for(y=0;y<SIZE;y++){
 		for(x=0;x<SIZE;x++){
-			printf("y%i x%i\n", y, x);
 			((gp)->b[y][x]).g= 0;
 			((gp)->b[y][x]).m= NOT_CHANGED;	
 		}
@@ -237,8 +233,8 @@ void init(GAME_PACKAGE * gp){
 	((gp)->b[3][0]).g = 0; ((gp)->b[3][1]).g = 4; ((gp)->b[3][2]).g = 2; ((gp)->b[3][3]).g = 4;
 	#else
 	
-	magic_number();
-	magic_number();
+	magic_number(gp);
+	magic_number(gp);
 	
 	#endif
 }
