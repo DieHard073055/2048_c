@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include <conio.h>
 
 #define DEBUG
 /*
@@ -30,9 +31,9 @@ typedef struct{
 }GAME;
 
 typedef struct{
-	GAME **b;
+	GAME b[SIZE][SIZE];
 	int score;
-	char * player;
+	char player[100];
 }GAME_PACKAGE;
 
 GAME_PACKAGE * setup();
@@ -68,12 +69,13 @@ void save_player_data(GAME_PACKAGE * gp);
 void read_player_data();
 
 int main(){
-	GAME_PACKAGE * gp;
+	GAME_PACKAGE p;
+	GAME_PACKAGE * gp = &p;
 	bool GAME_STATE_RUNNING = true;
-	int input=0, count=0;
+	int input=0, i;
 	
 	
-	gp = setup();
+	/*gp = setup();*/
 	init(gp);
 	welcome(gp);
 	while(GAME_STATE_RUNNING){
@@ -109,16 +111,17 @@ int main(){
 	save_player_data(gp);
 	read_player_data();
 	
-	for(i=0;i<SIZE;i++)
+	
+	/*for(i=0;i<SIZE;i++)
 	free((gp)->b[i]);
 	free((gp)->b);
 	free((gp)->player);
-	free(gp);
+	free(gp);*/
 	
 	return 0;
 }
 GAME_PACKAGE * setup(){
-	GAME_PACKAGE * gp;
+/*	  GAME_PACKAGE * gp;
 	GAME **b;
 	int i;
 	
@@ -131,19 +134,24 @@ GAME_PACKAGE * setup(){
 	(gp)->b = b;
 	
 	return gp;
-	
+	*/
+	return NULL;
 }
 void welcome(GAME_PACKAGE * gp){
 	char name[50], ch;
-	int i=-1;
+	int i=0;
 	printf("\t########## WELCOME TO 2048 ##########");
 	printf("\n\n\n\tPlease Enter Your Name : ");
-	 while ((ch = getchar()) != '\n' && ch != EOF){
-	 	name[++i] = ch;
-	 }  
+	 /*while ((ch = getchar()) != '\n' && ch != EOF){
+	 	fflush(stdin);
+	 	name[i++] = ch;
+	 } */
+	 scanf("%s", name); 
+	 printf("i = %i\n",i);
 	(gp)->score = 0;
-	(gp)->player = (char*) calloc(i, sizeof(char*));
+	printf("i = %i\n",i);
 	strcpy((gp)->player, name);
+	printf("i = %i\n",i);
 	printf("\n\n\n\t\t Welcome %s, Lets Begin!\n\n",name);
 	
 }
@@ -212,6 +220,7 @@ void init(GAME_PACKAGE * gp){
 	
 	for(y=0;y<SIZE;y++){
 		for(x=0;x<SIZE;x++){
+			printf("y%i x%i\n", y, x);
 			((gp)->b[y][x]).g= 0;
 			((gp)->b[y][x]).m= NOT_CHANGED;	
 		}
@@ -347,8 +356,9 @@ int get_user_input(GAME_PACKAGE * gp){
 	
 	printf("\n\tENTER NEXT DIRECTION (Q|W|A|S|D|R) : ");
 	
-	input = getchar();
-	getchar();
+	/*input = getchar();
+	getchar();*/
+	input = getch();
 	
 	switch(input){
 	
